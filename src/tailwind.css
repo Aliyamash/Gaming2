@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "roya";
+    src: url(../dist/Far_Roya/Far_Roya.ttf);
+  }
+}
+@layer components {
+  .btn {
+    @apply py-2 px-4 text-white text-xl rounded-full transition duration-300 ease-out  dark:text-black dark:hover:text-white;
+  }
+  .btn-primary {
+    @apply bg-indigo-400 shadow-lg shadow-indigo-400/50  hover:shadow-lg hover:shadow-gray-600/50 hover:bg-gray-200 hover:text-black;
+  }
+  .btn-secondary {
+    @apply bg-gray-200 text-black shadow-lg shadow-gray-200/50 hover:bg-indigo-400 hover:shadow-lg hover:shadow-indigo-400/50 hover:text-white;
+  }
+
+  .nav-item {
+    @apply transition duration-300 ease-in-out hover:border-b-2 hover:border-indigo-500;
+  }
+  .hover2 {
+    @apply transition duration-300 ease-in-out hover:text-white dark:hover:text-black;
+  }
+
+  [x-cloak] {
+    display: none !important;
+  }
+  .form-label {
+    @apply text-gray-800 font-bold block dark:text-white text-2xl;
+  }
+  .form-input {
+    @apply w-full border border-gray-300 mt-3 py-3 px-4 rounded focus:outline-none focus:ring-4 focus:ring-opacity-50 focus:ring-yellow-600 dark:bg-gray-800;
+  }
+}
+
+@layer utilities {
+  .fill-emerald-50 {
+    fill: #ecfdf5; 
+  }
+
+  .fill-orange-950 {
+    fill: #431407;
+  }
+  .fill-zinc-900 {
+   fill:  #18181b;
+  }
+}

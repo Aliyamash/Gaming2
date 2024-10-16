@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html x-data="darkMode" lang="en" dir="rtl" :class="{'dark' : darkMode}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="./dist/style.css">
+    <title>League info</title>
+</head>
+
+<body class="font-roya font-bold  dark:bg-gradient-to-r from-neutral-900 to-yellow-900">
+
+    <!-- Header (Navbar) -->
+    <header class="shadow-lg text-xl font-bold ">
+        <div class="container mx-auto py-4 px-10 ">
+            <nav class="relative flex justify-between items-center dark:text-white">
+
+                <!-- desktop navbar -->
+                <div class="hidden lg:flex items-center">
+                    <div>
+                        <button class="btn btn-primary">عضویت</button>
+                        <button class="btn btn-secondary mr-3">ورود</button>
+                    </div>
+                    <div class="flex mr-10 ">
+                        <ul class="flex gap-8">
+                            <li class="nav-item pb-1"><a href="#">
+                                    صفحه اصلی
+                                    <i class="fa-solid fa-house text-xs"></i>
+                                </a></li>
+                            <li class="nav-item pb-1"><a href="#">
+                                    معرفی
+                                    <i class="fa-solid fa-circle-info text-lg"></i>
+                                </a></li>
+                            <div x-data="dropdown">
+                                <li @click="toggle" class="nav-item-active pb-1"><a href="#">
+                                        چمپیون ها
+                                        <i class="fa-solid fa-user-group text-xs hover:text-purple-900"><i
+                                                class="fa-solid fa-angle-down text-xl"></i></i>
+                                    </a></li>
+                                <div class="flex gap-7 top-20 py-4 px-5 absolute bg-purple-500 border border-none rounded-lg"
+                                    x-show="open" x-cloak x-transition:enter="transition ease-out duration-300"
+                                    x-transition:enter-start="opacity-0 scale-90"
+                                    x-transition:enter-end="opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-300"
+                                    x-transition:leave-start="opacity-100 scale-100"
+                                    x-transition:leave-end="opacity-0 scale-90">
+                                    <ul class="hover2">
+                                        <a href="#">
+                                            <li>Support</li>
+                                        </a>
+                                    </ul>
+                                    <ul class="hover2">
+                                        <a href="#">
+                                            <li>ADC</li>
+                                        </a>
+                                    </ul>
+                                    <ul class="hover2">
+                                        <a href="#">
+                                            <li>Midlane</li>
+                                        </a>
+                                    </ul>
+                                    <ul class="hover2">
+                                        <a href="#">
+                                            <li>Jungle</li>
+                                        </a>
+                                    </ul>
+                                    <ul class="hover2">
+                                        <a href="#">
+                                            <li>Toplane</li>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                            <li class="nav-item pb-1"><a href="#">
+                                    ارتباط با ما
+                                    <i class="fa-solid fa-phone text-xs"></i>
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <!-- mobile nabvar -->
+                <div class="lg:hidden" x-data="dropdown">
+                    <div @click="toggle">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </div>
+
+                    <div class="absolute w-full py-4 px-5 absolute bg-gray-100 border rounded-lg dark:bg-gradient-to-r from-neutral-900 to-yellow-900""
+                        x-show=" open" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+                        <div class="absolute" @click="open =  false">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="flex">
+                                <ul class="flex flex-col gap-8 items-center">
+                                    <li class="nav-item pb-1"><a href="#">
+                                            صفحه اصلی
+                                            <i class="fa-solid fa-house text-xs"></i>
+                                        </a></li>
+                                    <li class="nav-item pb-1"><a href="#">
+                                            معرفی
+                                            <i class="fa-solid fa-circle-info text-lg"></i>
+                                        </a></li>
+                                    <div x-data="dropdown">
+                                        <li @click="toggle" class="nav-item-active pb-1 "><a href="#">
+                                                چمپیون ها
+                                                <i class="fa-solid fa-user-group text-xs hover:text-purple-900"><i
+                                                        class="fa-solid fa-angle-down text-xl"></i></i>
+                                            </a></li>
+                                        <div class="flex flex-col gap-3 mx-auto py-4 px-6 max-w-max bg-purple-500 dark:bg-gradient-to-r from-neutral-900 to-yellow-900 border rounded-lg "
+                                            x-show="open" x-cloak x-transition:enter="transition ease-out duration-300"
+                                            x-transition:enter-start="opacity-0 scale-90"
+                                            x-transition:enter-end="opacity-100 scale-100"
+                                            x-transition:leave="transition ease-in duration-300"
+                                            x-transition:leave-start="opacity-100 scale-100"
+                                            x-transition:leave-end="opacity-0 scale-90">
+                                            <ul class="hover2 ">
+                                                <a href="#">
+                                                    <li>Support</li>
+                                                </a>
+                                            </ul>
+                                            <ul class="hover2">
+                                                <a href="#">
+                                                    <li>ADC</li>
+                                                </a>
+                                            </ul>
+                                            <ul class="hover2">
+                                                <a href="#">
+                                                    <li>Midlane</li>
+                                                </a>
+                                            </ul>
+                                            <ul class="hover2">
+                                                <a href="#">
+                                                    <li>Jungle</li>
+                                                </a>
+                                            </ul>
+                                            <ul class="hover2">
+                                                <a href="#">
+                                                    <li>Toplane</li>
+                                                </a>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <li class="nav-item pb-1"><a href="#">
+                                            ارتباط با ما
+                                            <i class="fa-solid fa-phone text-xs"></i>
+                                        </a></li>
+                                </ul>
+                            </div>
+                            <div class="flex flex-col gap-5 mt-7 w-full">
+                                <button class="btn btn-primary">عضویت</button>
+                                <button class="btn btn-secondary">ورود</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- logo -->
+                <div data-aos="fade-right" data-aos-delay="150" data-aos-duration="500"
+                    class="text-center flex items-center gap-3">
+                    <!-- DARK MODE BUTTON -->
+                    <div class="ml-2">
+                        <button @click="toDarkMode" x-show="nextMode =='dark'" x-cloak
+                            class="btn btn-secondary leading-0">
+                            <i class="fa-regular fa-lightbulb"></i>
+                        </button>
+                        <button @click="toSystemMode" x-show="nextMode =='system'" x-cloak
+                            class="btn btn-secondary leading-0">
+                            <i class="fa-solid fa-display"></i>
+                        </button>
+                        <button @click="toLighteMode" x-show="nextMode =='light'" x-cloak
+                            class="btn btn-secondary leading-0">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </button>
+                    </div>
+                    <h2 class="text-2xl">League of Info</h2>
+                    <img width="50" height="50" src="https://img.icons8.com/plasticine/100/league-of-legends.png"
+                        alt="league-of-legends" />
+                </div>
+
+
+
+            </nav>
+        </div>
+
+    </header>
+
+    <!-- section Home -->
+    <section class="container mx-auto py-6 px-10">
+        <div class="flex flex-col lg:flex-row  lg:gap-x-20 items-center justify-between mt-3">
+            <div data-aos="fade-left" data-aos-duration="400" data-aos-easing="ease-in-out" class="mt-8 lg:mt-0">
+                <div>
+                    <h1 class="text-4xl lg:text-5xl  font-bold mb-8">لیگ <span
+                            class="text-indigo-600 dark:text-white">اینفو</span> </h1>
+                    <p class="text-xl lg:text-2xl font-bold text-gray-400 dark:text-white text-justify leading-8 mb-4 ">
+                        لیگ اینفو با افتخار شمارو مطلع میکنه و اطلاعاتی راجع به نحوه و طرز استفاده انواع قهرمانان بازی
+                        لیگ آف
+                        لجندز را توضیح میدهد</p>
+                </div>
+                <br>
+                <p class="mb-4 text-2xl text-gray-600 dark:text-yellow-400">
+                    برای اطلاعات بیشتر نیازمند عضویت در سایت هستید...
+                </p>
+                <div class="mb-5 lg:mb-0">
+                    <button class="btn btn-primary">عضویت</button>
+                    <button class="btn btn-secondary mr-5">ورود</button>
+                </div>
+            </div>
+            <img data-aos="fade-down-right" class="rounded-lg shadow-2xl" width="850" height="850"
+                src="./dist/img/png.3.png" alt="league-of-legends">
+        </div>
+    </section>
+    <!-- section service -->
+
+    <section>
+
+        <div style="height: 150px; overflow: hidden;">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+                <path class="fill-emerald-50 dark:fill-orange-950"
+                    d="M-146.44,-88.30 C149.99,150.00 349.20,-49.98 565.74,215.63 L423.53,172.22 L0.00,150.00 Z"></path>
+            </svg>
+        </div>
+        <section class="bg-emerald-50 dark:bg-orange-950 lg:py-10">
+            <div data-aos="zoom-in-down" class="container mx-auto py-4 px-10">
+                <div class="text-center">
+                    <h1 class="text-4xl lg:text-5xl  font-bold mb-8 ">معرفی</h1>
+                    <p class="text-xl lg:text-3xl font-bold text-gray-400 dark:text-white mb-4 ">لیگ اینفو با افتخار
+                        شمارو
+                        مطلع
+                        میکنه و اطلاعاتی راجع به نحوه و طرز استفاده انواع قهرمانان بازی لیگ آف
+                        لجندز را توضیح میدهد</p>
+                </div>
+
+            </div>
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-3 lg:w-4/5 w-4/5 mx-auto mt-8 dark:text-gray-200 py-10">
+                <div class="flex items-center">
+                    <a href="#">
+                        <img data-aos="fade-down-left" data-aos-duration="800" data-aos-easing="ease-in-out"
+                            class="border border-1 border-yellow-500 p-4 rounded-full" width="100" height="100"
+                            src="./dist/img/Support.png" alt="Support">
+                    </a>
+                    <p data-aos="fade-down" class="text-2xl mr-5">این پست در بازی نقش مهمی را ایفا میکنید و نقش کمک
+                        رسانی اول به adc و بعد به
+                        دیگر پست های بازی را دارد</p>
+                </div>
+                <div class="flex items-center">
+                    <a href="#">
+                        <img data-aos="fade-down-left" data-aos-duration="900" data-aos-easing="ease-in-out"
+                            class="border border-1 border-yellow-500 p-4 rounded-full" width="100" height="100"
+                            src="./dist/img/ADC.png" alt="AttackDamgeCarry">
+                    </a>
+                    <p data-aos="fade-down" class="text-2xl mr-5">این پست از بازی خیلی آسیب پذیر هست ولی دمیج زیادی
+                        دارد و به کمک ساپورتت به
+                        پایین نقشه میرود</p>
+                </div>
+                <div class="flex items-center">
+                    <a href="#">
+                        <img data-aos="fade-down-left" data-aos-duration="1000" data-aos-easing="ease-in-out"
+                            class="border border-1 border-yellow-500 p-4 rounded-full" width="100" height="100"
+                            src="./dist/img/MidLane.png" alt="MidLane">
+                    </a>
+                    <p data-aos="fade-down" class="text-2xl mr-5">در این پست از بازی نقش حساسی را اایفا میکنید و شما
+                        باید بسیار مراقب باشید
+                        زیرا مرکز نقشه است </p>
+                </div>
+                <div class="flex items-center">
+                    <a href="#">
+                        <img data-aos="fade-down-left" data-aos-duration="1100" data-aos-easing="ease-in-out"
+                            class="border border-1 border-yellow-500 p-4 rounded-full" width="100" height="100"
+                            src="./dist/img/Jungle.png" alt="Jungle">
+                    </a>
+                    <p data-aos="fade-down" class="text-2xl mr-5">پست جنگل را میتوان مهم ترین پست بازی معرفی کرد زیرا
+                        نقش شما کمک رسانی به
+                        سایر پست ها است</p>
+                </div>
+                <div class="flex items-center">
+                    <a href="#">
+                        <img data-aos="fade-down-left" data-aos-duration="1200" data-aos-easing="ease-in-out"
+                            class="border border-1 border-yellow-500 p-4 rounded-full" width="100" height="100"
+                            src="./dist/img/TopLane.png" alt="Top">
+                    </a>
+                    <p data-aos="fade-down" class="text-2xl mr-5">شما در این پست غول سر سخت بازی هستید و بقیه پست ها
+                        روی شما حساب زیادی باز
+                        میکنند </p>
+                </div>
+            </div> 
+        </section>
+        <div style="height: 100px; overflow: hidden;"><svg viewBox="0 0 500 150" preserveAspectRatio="none"
+                style="height: 100%; width: 100%;">
+                <path class="fill-emerald-50 dark:fill-orange-950"
+                    d="M-3.67,87.34 C149.99,150.00 275.11,-7.38 516.64,162.34 L500.00,0.00 L0.00,0.00 Z"></path>
+            </svg>
+        </div>
+        <div>
+            <img src="./عکس گالریت" alt="">
+        </div>
+    </section>
+
+
+    <!-- section pricing -->
+
+    <section>
+        <div class="container mx-auto py-4 px-10">
+
+            <!-- title pricing -->
+
+            <div data-aos="fade-down" data-aos-duration="300" class="text-center mb-20">
+                <h1 class="text-4xl lg:text-5xl  font-bold mb-8 ">چمپیون ها </h1>
+                <p class="text-xl lg:text-2xl font-bold text-gray-400 dark:text-white ">لیگ اینفو با افتخار شمارو
+                    مطلع
+                    میکنه و اطلاعاتی راجع به نحوه و طرز استفاده انواع قهرمانان بازی لیگ آف
+                    لجندز را توضیح میدهد</p>
+            </div>
+
+
+
+            <div class="flex flex-col lg:flex-row  gap-32  ">
+                <div data-aos="flip-right" data-aos-delay="300" data-aos-duration="300" data-aos-easing="ease-in-out"
+                    class="ring-2 ring-yellow-500 h-3/5 rounded rounded-lg text-center ">
+                    <img class="object-cover h-[45rem] w-full rounded rounded-lg" src="./dist/img/Dark Cosmic Lux.jpeg"
+                        alt="lux league-of-legends">
+                    <div class="py-5 px-20 dark:text-white">
+                        <div class="py-3">
+                            <h2 class="text-3xl py-5 font-bold	">لاکس | Lux</h2>
+                            <p class="text-xl">پست : <span>Support</span></p>
+                            <p class="py-5 text-normal">دسته : <span>Mage</span></p>
+                        </div>
+                        <hr>
+                        <p class="w-3/4 mx-auto my-8 text-xl ">الهه ای از سرزمین دماسیا است که قدرت او با استفاده از نور
+                            و خورشید است و میتواند نور را خم کند</p>
+                        <button class="btn btn-primary mb-5">اطلاعات بیشتر</button>
+                    </div>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="500" data-aos-duration="600" data-aos-easing="ease-in-out"
+                    class="ring-2 h-3/5  ring-yellow-500 rounded rounded-lg text-center ">
+                    <img class="object-cover  h-[45rem] w-full rounded rounded-lg" src="./dist/img/morgana.jpeg"
+                        alt="morgana league of legends">
+                    <div class="py-5 px-20 dark:text-white">
+                        <div class="py-3">
+                            <h2 class="text-3xl py-5 ">مورگانا | Morgana</h2>
+                            <p class="text-xl">پست : <span>Support</span></p>
+                            <p class="py-5">دسته : <span>Mage</span></p>
+                        </div>
+                        <hr>
+                        <p class="w-3/4 mx-auto my-8 text-xl">مورگانا خواهر کایل است ک خواهان عدالت و صلح است گرچه شکل
+                            زیبا و ترسناکی دارد ولی قلب بسیار پاکی دارد</p>
+                        <button class="btn btn-primary mb-5">اطلاعات بیشتر</button>
+                    </div>
+                </div>
+                <div data-aos="flip-left" data-aos-delay="300" data-aos-duration="300" data-aos-easing="ease-in-out"
+                    class="ring-2 ring-yellow-500 h-3/5 rounded rounded-lg text-center ">
+                    <img class="object-cover h-[45rem] w-full rounded rounded-lg shadow shadow-lg"
+                        src="./dist/img/Urgot.jpeg" alt="urgot league-of-legends">
+                    <div class="py-5 px-20 dark:text-white">
+                        <div class="py-3">
+                            <h2 class="text-3xl py-5 font-bold	">اورگات | Urgot</h2>
+                            <p class="text-xl">پست : <span>TopLane</span></p>
+                            <p class="py-5">دسته : <span>Mage</span></p>
+                        </div>
+                        <hr>
+                        <p class="w-3/4 mx-auto my-8 text-xl">مردی با پاهای شبیه به خرچنگ است که در دست چپ خود یک تیربار
+                            دارد و دشمنان را تیرباران میکند</p>
+                        <button class="btn btn-primary mb-5">اطلاعات بیشتر</button>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+
+
+    <!-- section Gallery -->
+
+    <section class="mt-44">
+        <div class="container mx-auto py-4 px-10 ">
+            <!-- title pricing -->
+            <div data-aos="fade-up" class="text-center mb-10">
+                <h1 class="text-4xl lg:text-5xl  font-bold mb-8 ">گالری چمپیون ها</h1>
+                <p class="text-xl lg:text-2xl font-bold text-gray-400 dark:text-white mb-4 ">در این قسمت با چهره تعدادی
+                    از چمپیون های بازی در پست های مختلف آشنا میشید</p>
+            </div>
+
+
+            <div data-aos="fade-up" data-aos-delay="400" x-data="tabs" class="mt-20">
+                <ul class="flex justify-center text-xl mb-16">
+                    <!-- <li class="px-3 py-2 cursor-pointer border-b-4 border-yellow-500 mx-5 bg-gray-100 rounded rounded-lg">MidLane</li> -->
+                    <template x-for="(tab , index) in tabs" :key="index">
+                        <li x-text="tab.display_category" @click="tabName = tab.category"
+                            class="px-2 py-1 cursor-pointer rounded rounded-lg bg-gray-100 transition transition-all"
+                            :class="tabName == tab.category ? ' border-b-4 border-yellow-500 bg-gray-100 rounded rounded-lg' : ''">
+                        </li>
+                    </template>
+                </ul>
+
+                <template x-for="(tab , index) in tabs" :key="index">
+                    <div x-show="tab.category == tabName "
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                        <template x-for="(image , index) in tab.images" :key="index">
+                            <div>
+                                <img width="473px" height="213px" class="rounded-lg object-cover" :src="image" alt="">
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- contact us -->
+
+    <section class="mt-36">
+        <div class="container mx-auto lg:w-4/5 mx-auto py-4 px-10 lg:px-20">
+            <div class="flex flex-col lg:flex-row items-center gap-x-24">
+                <div data-aos="fade-up" class="mt-8 lg:mt-0">
+                    <h1 class="text-3xl font-bold mb-5 dark:text-white">ارتباط با ما</h1>
+                    <p class="text-gray-700 text-justify text-2xl leading-8 mb-6 dark:text-white">
+                        میتونید در این فیلد ها نظرات خودتون رو برای ما بفرستید
+                    </p>
+                    <form action="#">
+                        <div>
+                            <label class="form-label" for="email">ایمیل : </label>
+                            <input class="form-input" id="email" type="email" placeholder="ایمیل ...">
+                        </div>
+                        <div class="mt-5">
+                            <label class="form-label" for="text">متن پیام : </label>
+                            <textarea rows="6" class="form-input" id="text" type="email"
+                                placeholder="پیام ..."></textarea>
+                        </div>
+                        <button class="btn btn-primary mt-5">ارسال پیام</button>
+                    </form>
+                </div>
+                <img data-aos="fade-up" data-aos-delay="400" width="850" height="850" src="./dist/img/contact.png"
+                    alt="">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Frame -->
+    <div style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+            <path class="fill-zinc-900"
+                d="M-65.74,24.19 C149.99,150.00 349.20,-49.98 530.76,73.53 L500.00,150.00 L0.00,150.00 Z"></path>
+        </svg>
+    </div>
+    <!-- footer -->
+
+    <footer class="bg-zinc-900">
+        <div class="container mx-auto py-4 px-10 flex flex-col lg:flex-row items-center justify-between ">
+            <div class="py-16">
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <h1  class="mt-6 text-white text-2xl lg:text-5xl md:text-3xl text-bold"><span
+                            class="text-bold text-yellow-400">لیگ</span> اینفو</h1>
+                    <p class="my-6  text-2xl text-white"> معرفی تمامی چمپیون های بازی لیگ آف لجندز</p>
+                </div>
+                <div>
+                    <ul class=" text-3xl flex gap-5">
+                        <li class="text-white hover:text-gray-400 transition-all"><a
+                                href="https://www.linkedin.com/in/ali-ashrafi-b24943299/"><i
+                                    class="fa-brands fa-linkedin"></i></a></li>
+                        <li class="text-white hover:text-gray-400 transition-all"><a
+                                href="https://www.instagram.com/aliyam__ash?igsh=MWFhOXE0NmVpN3RkZg=="><i
+                                    class="fa-brands fa-instagram"></i></a></li>
+                        <li class="text-white hover:text-gray-400 transition-all"><a href="https://t.me/aliyam_ashh"><i
+                                    class="fa-brands fa-whatsapp"></i></a></li>
+                        <li class="text-white hover:text-gray-400 transition-all"><a href="https://t.me/aliyam_ashh"><i
+                                    class="fa-brands fa-telegram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="grid grid-cols-2  gap-16 my-8 lg:my-0">
+                <div data-aos="fade-up" class="text-white lg:text-2xl ">
+                    <h2 class="border-b-2 border-yellow-500 rounded pb-3 mb-5">بخش های وب سایت</h2>
+
+                    <ul class="flex-col gap-5">
+                        <li class=" pb-1"><a href="#">
+                                صفحه اصلی
+                                <i class="fa-solid fa-house text-xs"></i>
+                            </a></li>
+                        <li class="pb-1"><a href="#">
+                                معرفی
+                                <i class="fa-solid fa-circle-info text-lg"></i>
+                            </a></li>
+                        <div>
+                            <li class="pb-1"><a href="#">
+                                    چمپیون ها
+                                    <i class="fa-solid fa-user-group text-xs hover:text-purple-900"></i>
+                                </a></li>
+                            <li class="pb-1"><a href="#">
+                                    ارتباط با ما
+                                    <i class="fa-solid fa-phone text-xs"></i>
+                                </a></li>
+                    </ul>
+                </div>
+                <div data-aos="fade-up" dir="ltr" class="text-white lg:text-2xl space-y-3 dr">
+                    <h2>Email : ali2763.mar@gmail.com <i class="fa-solid fa-at mr-3"></i></h2>
+                    <h2>PhoneNumber : +989211557398 <i class="fa-solid fa-phone mr-3"></i></h2>
+                </div>
+            </div>
+
+        </div>
+        <h2  class="bg-zinc-900 text-center text-white"><i class="fa-regular fa-copyright"></i> All site rights belong to
+            Morgan </h2>
+    </footer>
+
+    
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('dropdown', () => ({
+                open: false,
+                toggle() {
+                    this.open = !this.open
+                },
+            })),
+                Alpine.data('darkMode', () => ({
+                    darkMode: false,
+                    nextMode: '',
+
+
+                    init() {
+                        this.nextMode = localStorage.nextThemMode;
+                        if (localStorage.theme === 'dark') {
+                            this.darkMode = true;
+                        } else {
+                            this.darkMode = false;
+                        }
+                    },
+
+                    toDarkMode() {
+                        localStorage.theme = 'dark'
+                        localStorage.nextThemMode = 'system'
+                        this.darkMode = true;
+                        this.nextMode = 'system'
+                    },
+                    toSystemMode() {
+                        localStorage.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                        localStorage.nextThemMode = 'light'
+                        this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                        this.nextMode = 'light';
+                    },
+                    toLighteMode() {
+                        localStorage.theme = 'light'
+                        localStorage.nextThemMode = 'dark'
+                        this.darkMode = false;
+                        this.nextMode = 'dark'
+                    },
+
+                })),
+                Alpine.data('tabs', () => ({
+                    tabName: 'Support',
+                    tabs: [
+                        {
+                            'category': 'Support',
+                            'display_category': 'Support',
+                            'images': [
+                                './dist/img/lux.jpeg',
+                                './dist/img/Dawnbringer Morgana.jpeg',
+                                './dist/img/seraphin.jpeg',
+                                './dist/img/janna.jpeg',
+                            ]
+                        },
+                        {
+                            'category': 'ADC',
+                            'display_category': 'ADC',
+                            'images': [
+                                './dist/img/draven.jpeg',
+                                './dist/img/kalista.jpeg',
+                                './dist/img/kaisa.jpeg',
+                                './dist/img/Varus.jpeg',
+                                './dist/img/Tristana.jpeg',
+                                './dist/img/MissFortune.jpeg',
+                            ]
+                        },
+                        {
+                            'category': 'MidLane',
+                            'display_category': 'MidLane',
+                            'images': [
+                                './dist/img/Ekko.gif',
+                                './dist/img/lisandra.jpeg',
+                                './dist/img/lux.jpeg',
+                                './dist/img/Yasuo.jpeg',
+                                './dist/img/Yone.jpeg',
+                            ]
+                        },
+                        {
+                            'category': 'Jungle',
+                            'display_category': 'Jungle',
+                            'images': [
+                                './dist/img/Ekko.gif',
+                                './dist/img/kindred.jpeg',
+                                './dist/img/lilia.jpeg',
+                                './dist/img/nunu.jpeg',
+                                './dist/img/ramus.jpeg',
+                                './dist/img/sejuani.jpeg',
+                                './dist/img/warwick.jpeg',
+                            ]
+                        },
+                        {
+                            'category': 'TopLane',
+                            'display_category': 'TopLane',
+                            'images': [
+                                './dist/img/Mundo.jpeg',
+                                './dist/img/Renekton.jpeg',
+                                './dist/img/Sett.jpeg',
+
+                                './dist/img/wokoung.jpeg',
+                                './dist/img/Yone.jpeg',
+                            ]
+                        },
+                        {
+                            'category': 'All',
+                            'display_category': 'All',
+                            'images': [
+                                './dist/img/Ekko.gif',
+                                './dist/img/kindred.jpeg',
+                                './dist/img/lilia.jpeg',
+                                './dist/img/nunu.jpeg',
+                                './dist/img/ramus.jpeg',
+                                './dist/img/sejuani.jpeg',
+                                './dist/img/warwick.jpeg',
+                                './dist/img/Dawnbringer Morgana.jpeg',
+                                './dist/img/seraphin.jpeg',
+                                './dist/img/janna.jpeg',
+                                './dist/img/Mundo.jpeg',
+                                './dist/img/Renekton.jpeg',
+                                './dist/img/lisandra.jpeg',
+                                './dist/img/lux.jpeg',
+                                './dist/img/Yasuo.jpeg',
+                                './dist/img/Sett.jpeg',
+                                './dist/img/wokoung.jpeg',
+                                './dist/img/Yone.jpeg',
+                                './dist/img/draven.jpeg',
+                                './dist/img/kalista.jpeg',
+                                './dist/img/kaisa.jpeg',
+                                './dist/img/Varus.jpeg',
+                                './dist/img/Tristana.jpeg',
+                                './dist/img/MissFortune.jpeg',
+                            ]
+
+                        }
+                    ]
+                }))
+        })
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
